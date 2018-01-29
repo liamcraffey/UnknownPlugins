@@ -268,16 +268,16 @@ body.page-sliding {
 
         &.outer-controls {
             .slick-prev {
-                left: 25px;
+                left: -55px;
                 [dir="rtl"] & {
-                    right: 25px;
+                    right: -55px;
                 }
             }
 
             .slick-next {
-                right: 25px;
+                right: -55px;
                 [dir="rtl"] & {
-                    left: 25px;
+                    left: -55px;
                 }
             }
         }
@@ -332,6 +332,10 @@ body.page-scrolling .section-slider {
 .section-double {
     @include media("<=screen-sm") {
         padding-top: 0;
+
+        .fp-scroller {
+            padding-top: 0 !important;
+        }
     }
 
     .section-image {

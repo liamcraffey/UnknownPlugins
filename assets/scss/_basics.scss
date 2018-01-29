@@ -67,6 +67,12 @@ body:not(.page-sliding) {
     
 }
 
+body.page-sliding { 
+    .pos-v-center {
+        @include translate3d(0,0,0);
+    }
+}
+
 .pos-v-bottom {
     position: relative;
     bottom: 4vw;

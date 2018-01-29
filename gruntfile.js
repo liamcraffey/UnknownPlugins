@@ -35,6 +35,23 @@ module.exports = function (grunt) {
                         return dest + "/" + src.replace('.scss', '.css')
                     }
                 }]
+            },
+            docs: {
+                options: {
+                    sourceMap: false,
+                    debugInfo: true,
+                    trace: true,
+                    outputStyle: "expanded"
+                },
+                files: [{
+                    expand: true,
+                    cwd: "documentation/papear/scss",
+                    src: ["**/*.scss"],
+                    dest: "documentation/papear/css",
+                    rename: function (dest, src) {
+                        return dest + "/" + src.replace('.scss', '.min.css')
+                    }
+                }]
             }
         },
         watch: {
@@ -47,6 +64,20 @@ module.exports = function (grunt) {
             },
             scripts: {
                 files: ['assets/js/core.js'],
+                tasks: ['uglify'],
+                options: {
+                    spawn: false
+                }
+            },
+            docsStyles: {
+                files: ['documentation/papear/**/*.scss'],
+                tasks: ['sass:docs'],
+                options: {
+                    spawn: false
+                }
+            },
+            docsScripts: {
+                files: ['documentation/papear/js/papear.js'],
                 tasks: ['uglify'],
                 options: {
                     spawn: false
@@ -92,6 +123,20 @@ module.exports = function (grunt) {
                     'assets/js/core.min.js':
                     [
                         'assets/js/core.js'
+                    ]
+                }
+            },
+            docs: {
+                files: {
+                    'documentation/papear/js/papear-bundle.min.js':
+                    [
+                        'documentation/papear/js/papear-animation.js',
+                        'documentation/papear/js/papear-code.js',
+                        'documentation/papear/js/papear-color.js',
+                        'documentation/papear/js/papear-pre.js',
+                        'documentation/papear/js/papear-component.js',
+                        'documentation/papear/js/papear-tabs.js',
+                        'documentation/papear/js/papear.js'
                     ]
                 }
             }

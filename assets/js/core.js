@@ -3,8 +3,8 @@
 Ja - Advanced Personal Resume / CV vCard Template
 
 File:           JS Core
-Version:        1.01
-Last change:    15/09/2017 
+Version:        1.11
+Last change:    20/10/2017 
 Author:         Suelo 
 
 -------------------------------------------------------------------------------- */
@@ -243,9 +243,15 @@ Author:         Suelo
                             }
 
                             if ($self.hasClass('bg-image-container')) {
-                                $self.css({
-                                    'background-position': 'calc(50% - ' + dx + 'px) ' + 'calc(50% - ' + dy + 'px'
-                                });
+                                if ($self.hasClass('h-only')) {
+                                    $self.css({
+                                        'background-position': 'calc(50% - ' + dx + 'px) ' + '50%'
+                                    });
+                                } else {
+                                    $self.css({
+                                        'background-position': 'calc(50% - ' + dx + 'px) ' + 'calc(50% - ' + dy + 'px)'
+                                    });
+                                }
                             } else if ($self.hasClass('lines-container')) {
                                 $self.css({
                                     'transform': 'translateX(' + dx + 'px)'
@@ -508,7 +514,7 @@ Author:         Suelo
 
                                 setTimeout(function(){
                                     $html.addClass('locked-scrolling');
-                                    $ajaxModalInner.fadeIn(300);
+                                    $ajaxModalInner.fadeIn(300).scrollTop(0);
                                     $ajaxModal.addClass('loading-finished');
                                     $ajaxTmp.html('');
                                     $ajaxClose.addClass('visible');
@@ -530,7 +536,7 @@ Author:         Suelo
                     $ajaxClose.removeClass('visible');
                     $ajaxModal.fadeOut(200, function() {
                         $(this).removeClass('loading-started loading-finished');
-                        $ajaxModalInner.hide(0);
+                        $ajaxModalInner.hide(0).html('');
                     })
                 }
 
@@ -625,7 +631,7 @@ Author:         Suelo
                     $sectionSlides = $('.section-slides',$content);
 
                 $sectionBgs.slick({
-                    infinite: true,
+                    infinite: false,
                     speed: 500,
                     fade: true,
                     cssEase: 'linear',
@@ -635,7 +641,7 @@ Author:         Suelo
                 });
 
                 $sectionSlides.slick({
-                    infinite: true,
+                    infinite: false,
                     speed: 500,
                     asNavFor: $('.section-bgs'),
                     dots: true,
@@ -645,7 +651,7 @@ Author:         Suelo
                 $sectionSlides.on('beforeChange', function(event, slick, currentSlide, nextSlide){
                     var $parentSection = $(this).parents('.section');
 
-                    if($(this).find('.slide').eq(nextSlide+1).hasClass('dark')) {
+                    if($(this).find('.slide').eq(nextSlide).hasClass('dark')) {
                         $parentSection.addClass('dark');
                     } else {
                         $parentSection.removeClass('dark');

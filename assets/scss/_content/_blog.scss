@@ -159,6 +159,21 @@
 	}
 }
 
+.dark .post {
+	ul.post-meta {
+		li {
+			color: $color-muted-light;
+		}
+	}
+	&.item {
+		background-color: rgba(#000,0.3);
+
+		.post-content p {
+			color: $color-muted-light;
+		}
+	}
+}
+
 .post-nav {
 	position: fixed;
 	top: 1rem;
